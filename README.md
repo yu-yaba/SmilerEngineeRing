@@ -3,9 +3,9 @@
 ### 概要
 * フロントエンドは/publicディレクトリです。
   * バニラJavaScriptであるためnpmなどのパッケージ管理サービス、Dockerfileは用意していません。
-  * ポートはバックエンドと同じhttp://localhost:3000/です。
+  * ポートはバックエンドと同じhttp://localhost:3000/ です。
 * OCRはlib/ocrディレクトリです。
-  * ポートはhttp://localhost:5001/にしています。
+  * ポートはhttp://localhost:5001/ にしています。
 
 ### セットアップ
 
