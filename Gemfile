@@ -3,6 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.4"
 
+gem 'devise', '4.9.4'
+gem 'bcrypt', '3.1.20'
+gem 'orm_adapter', '0.5.0'
+gem 'responders', '3.1.1'
+gem 'warden', '1.2.9'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
 
