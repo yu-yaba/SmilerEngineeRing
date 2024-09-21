@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_21_083350) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_21_083847) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,49 +39,71 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_083350) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
+  create_table "events", primary_key: "event_id", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "user_id", limit: 36, null: false
+    t.string "name", limit: 100, null: false
     t.date "event_date"
     t.text "description"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_date"], name: "index_events_on_event_date"
+    t.index ["name"], name: "index_events_on_name"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
-  create_table "people", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.string "phone_number"
-    t.string "email"
+  create_table "people", primary_key: "person_id", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "user_id", limit: 36, null: false
+    t.string "name", limit: 100, null: false
+    t.string "phone_number", limit: 20
+    t.string "email", limit: 100
     t.text "address"
-    t.string "organization"
+    t.string "organization", limit: 100
     t.date "met_date"
     t.text "notes"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_people_on_email"
+    t.index ["name"], name: "index_people_on_name"
+    t.index ["phone_number"], name: "index_people_on_phone_number"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "places", primary_key: "place_id", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "user_id", limit: 36, null: false
+    t.string "name", limit: 100, null: false
+    t.text "address"
+    t.date "visited_date"
+    t.text "description"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_places_on_name"
+    t.index ["user_id"], name: "index_places_on_user_id"
+    t.index ["visited_date"], name: "index_places_on_visited_date"
+  end
+
+  create_table "users", primary_key: "user_id", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "username", limit: 50, null: false
+    t.timestamp "last_login"
+    t.boolean "is_active", default: true, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "username"
-    t.timestamp "last_login"
-    t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_id"], name: "index_users_on_user_id", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "events", "users"
-  add_foreign_key "people", "users"
+  add_foreign_key "events", "users", primary_key: "user_id"
+  add_foreign_key "people", "users", primary_key: "user_id"
+  add_foreign_key "places", "users", primary_key: "user_id"
 end
