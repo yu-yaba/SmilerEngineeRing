@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  extend Devise::Models
   # Devise モジュール
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
