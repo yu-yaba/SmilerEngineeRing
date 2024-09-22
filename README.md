@@ -33,3 +33,9 @@ docker-compose up
 ```
 http://localhost:3000/
 ```
+
+#### 初期データの投入コマンド
+```
+docker-compose run web rails db:seed
+
+```
