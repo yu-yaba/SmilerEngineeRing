@@ -6,7 +6,6 @@ class Link < ApplicationRecord
   belongs_to :from_node, polymorphic: true
   belongs_to :to_node, polymorphic: true
 
-  validates :color, presence: true, length: { maximum: 20 }
 
   # リンクは少なくとも一つのエンティティを参照する必要がある
   validate :must_have_from_and_to_nodes
