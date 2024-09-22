@@ -1,6 +1,3 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/renorari/smiler-engineering-frontend.git
-[submodule "lib"]
-	path = lib
-	url = https://github.com/RomaruDaze/SmilerEngineeRing.git
