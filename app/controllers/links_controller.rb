@@ -49,6 +49,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:from_node_type, :from_node_id, :to_node_type, :to_node_id, :color)
+    params.require(:link).permit(:from_node_type, :from_node_id, :to_node_type, :to_node_id)
   end
 end
