@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_21_131800) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_22_020256) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,6 +62,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_131800) do
     t.index ["event_date"], name: "index_events_on_event_date"
     t.index ["name"], name: "index_events_on_name"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "links", primary_key: "link_id", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "user_id", limit: 36, null: false
+    t.string "from_node_type", limit: 10, null: false
+    t.string "from_node_id", limit: 36, null: false
+    t.string "to_node_type", limit: 10, null: false
+    t.string "to_node_id", limit: 36, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_node_id"], name: "index_links_on_from_node_id"
+    t.index ["from_node_type", "from_node_id"], name: "index_links_on_from_node"
+    t.index ["from_node_type"], name: "index_links_on_from_node_type"
+    t.index ["to_node_id"], name: "index_links_on_to_node_id"
+    t.index ["to_node_type", "to_node_id"], name: "index_links_on_to_node"
+    t.index ["to_node_type"], name: "index_links_on_to_node_type"
+    t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "people", primary_key: "person_id", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -117,6 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_131800) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "custom_fields", "users", primary_key: "user_id"
   add_foreign_key "events", "users", primary_key: "user_id"
+  add_foreign_key "links", "users", primary_key: "user_id"
   add_foreign_key "people", "users", primary_key: "user_id"
   add_foreign_key "places", "users", primary_key: "user_id"
 end
