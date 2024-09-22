@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :users, only: [:index, :show, :create, :update, :destroy]
+  resources :people
+  resources :events
+  resources :places
+  resources :custom_fields
+  resources :links
+
+  root to: 'home#index' # 必要に応じてホームコントローラーを設定
 end
