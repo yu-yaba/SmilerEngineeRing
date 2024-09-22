@@ -66,6 +66,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    bcrypt (3.1.20)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
     builder (3.3.0)
@@ -75,6 +76,12 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    devise (4.9.4)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     erubi (1.13.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -110,6 +117,9 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.7-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    orm_adapter (0.5.0)
     psych (5.1.2)
       stringio
     puma (5.6.8)
@@ -153,11 +163,16 @@ GEM
       psych (>= 4.0.0)
     reline (0.5.10)
       io-console (~> 0.5)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     stringio (3.1.1)
     thor (1.3.2)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -165,18 +180,24 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
 
 DEPENDENCIES
+  bcrypt (= 3.1.20)
   bootsnap
   debug
+  devise (= 4.9.4)
   mysql2 (~> 0.5)
+  orm_adapter (= 0.5.0)
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.8, >= 7.0.8.4)
+  responders (= 3.1.1)
   tzinfo-data
+  warden (= 1.2.9)
 
 RUBY VERSION
-   ruby 3.1.6p260
+   ruby 3.1.4p223
 
 BUNDLED WITH
    2.5.4
